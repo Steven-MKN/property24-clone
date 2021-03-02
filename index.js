@@ -7,6 +7,7 @@ const path = require("path");
 const morgan = require("morgan");
 
 const app = express();
+require("dotenv").config();
 
 // middleware
 app.use(express.static("public"));
@@ -14,8 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // database connection
-const dbURI =
-  "mongodb+srv://NodeTestApp:HqZbska24nxxjgR@webstoretestcluster.lrgnb.mongodb.net/NodeTestApp";
+const dbURI = `mongodb+srv://${process.env.MONGO_USER_NAME}:${process.env.MONGO_PASSWORD}@webstoretestcluster.lrgnb.mongodb.net/${process.env.MONGO_DB}`;
 
 mongoose
   .connect(dbURI, {
