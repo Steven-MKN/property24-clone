@@ -23,7 +23,6 @@ const Searchbar = (props) => {
         <input
           placeholder="Search for a City, Surburb or ID"
           type="text"
-          autoComplete={false}
           className="col m9 white-text"
         ></input>
         <div className="btn col m2 red darken-1">
@@ -33,8 +32,8 @@ const Searchbar = (props) => {
       <div className="row">
         <div className="col s4 white-text">
           Min Price
-          <select className="input-field search-select">
-            <option value="any" selected={true}>
+          <select className="input-field search-select" defaultValue="any">
+            <option value="any">
               Any
             </option>
             <option value="100000">100 000</option>
@@ -49,8 +48,8 @@ const Searchbar = (props) => {
         </div>
         <div className="col s4 white-text">
           Max Price
-          <select className="input-field search-select">
-            <option value="any" selected={true}>
+          <select className="input-field search-select" defaultValue="any">
+            <option value="any" >
               Any
             </option>
             <option value="100000">100 000</option>
@@ -65,8 +64,8 @@ const Searchbar = (props) => {
         </div>
         <div className="col s4 white-text">
           Bedrooms
-          <select className="input-field search-select">
-            <option value="any" selected={true}>
+          <select className="input-field search-select" defaultValue="any">
+            <option value="any" >
               Any
             </option>
             <option value="1">1+</option>

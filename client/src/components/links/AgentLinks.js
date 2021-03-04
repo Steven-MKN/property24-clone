@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const AgentLinks = (props) => {
   return [
-    <li>
+    <li key="create">
       <NavLink to="/property/create" className="black-text">
         Create
       </NavLink>

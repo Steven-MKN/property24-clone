@@ -2,12 +2,12 @@ import { NavLink } from "react-router-dom";
 
 const NoUserLinks = (props) => {
   return [
-    <li>
+    <li key="login">
       <NavLink to="/login" className="black-text">
         Login
       </NavLink>
     </li>,
-    <li>
+    <li key="signup">
       <NavLink to="/signup" className="black-text">
         Sign up
       </NavLink>

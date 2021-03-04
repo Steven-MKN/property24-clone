@@ -1,7 +1,7 @@
 {
   "name": "property24_clone_server",
   "version": "1.0.0",
-  "description": "",
+  "description": "A property 24 app clone with the MERN stack",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,6 +10,7 @@
   },
   "author": "Steven Mokoena",
   "license": "ISC",
+  "repository": "https://github.com/Steven-MKN/property24-clone.git",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
@@ -20,5 +21,8 @@
     "mongoose": "^5.11.18",
     "morgan": "^1.10.0",
     "validator": "^13.5.2"
+  },
+  "nodemonConfig": {
+    "ignore": ["test/*", "docs/*", "client/*"]
   }
 }

@@ -1,8 +1,15 @@
 html {
 }
 
+body {
+  padding-bottom: 300px;
+}
+
 .navbar {
   display: flex;
+  position: sticky;
+  top: 0px;
+  z-index: 199;
 }
 
 .nav-list {
@@ -50,7 +57,17 @@ html {
 
 .property-card {
   border-radius: 5px;
-  padding: 0;
+  padding: 7px;
+  margin: 5px auto;
+  background: rgb(119, 114, 89);
+}
+
+.card-heading {
+  padding: 3px;
+}
+
+.card-heading-text {
+  margin-left: 5px;
 }
 
 .card-profile-image-div {
@@ -99,5 +116,17 @@ html {
 }
 
 .card-property-info {
-  padding: 5px;
+}
+
+.card-icons {
+  margin-left: 10px;
+}
+
+.container-content {
+  display: flex;
+}
+
+.put-mid {
+  margin: 0 auto !important;
+  float: none !important;
 }

@@ -5,9 +5,31 @@ const propertyRoutes = require("./routes/propertyRoutes");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 const morgan = require("morgan");
+const cors = require('cors');
 
 const app = express();
 require("dotenv").config();
+
+// write logs
+app.use(morgan("common"));
+
+app.use(cors({
+  credentials: true, origin: 'http://localhost:3000'
+}))
+
+app.use((req, res, next) => {	
+  
+  res.header('Access-Control-Allow-Origin', req.headers.origin);       
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Accept, Authorization');   
+  res.header('Access-Control-Allow-Credentials', true);    
+
+  if (req.method === 'OPTIONS'){
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); 
+    return res.status(200).send({})
+  }
+
+  next();
+});
 
 // middleware
 app.use(express.static("public"));
@@ -24,13 +46,10 @@ mongoose
     useCreateIndex: true,
   })
   .then((result) => {
-    app.listen(3000);
-    console.log("listening on port 3000");
+    app.listen(3001);
+    console.log("listening on port 3001");
   })
   .catch((err) => console.log(err));
-
-// write logs
-app.use(morgan("tiny"));
 
 // routes
 app.use("/api", authRoutes);

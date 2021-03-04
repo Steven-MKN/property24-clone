@@ -2,20 +2,20 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 const requireAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
+  const token = req.header('authorization') ? req.header('authorization').replace('Bearer ', '') : null
 
   if (token) {
     jwt.verify(token, "secrete here", (error, decodedToken) => {
       if (error) {
         console.log(error.message);
-        res.redirect("/login");
+        res.redirect("/login"); // send status instead
       } else {
         console.log(decodedToken);
         next();
       }
     });
   } else {
-    res.redirect("/login");
+    res.redirect("/login"); // send status instead
   }
 };
 
