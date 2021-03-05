@@ -18,8 +18,8 @@ const userSchema = new mongoose.Schema({
   userType: {
     type: String,
     required: true,
-    lowercase: true
-  }
+    lowercase: true,
+  },
 });
 
 // fire a funtion before doc saved to db

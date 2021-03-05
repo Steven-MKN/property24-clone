@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import axios from 'axios'
-import {api} from '../config'
+import axios from "axios";
+import { api } from "../config";
 
 const Login = (props) => {
   const [loginForm, setLoginForm] = useState({
@@ -10,48 +10,47 @@ const Login = (props) => {
     emailErrors: "",
     passwordErrors: "",
     userTypeError: "",
-    redirect: null
+    redirect: null,
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validInputs()) {
-      try{
-        const url = api + '/login'
+      try {
+        const url = api + "/login";
 
-        console.log(url)
-  
-        const response = await axios.post(url , {
+        console.log(url);
+
+        const response = await axios.post(url, {
           email: loginForm.email,
-          password: loginForm.password
-        })
-  
-        console.log(response)
-  
-        if (response.status === 200){
-          localStorage.setItem('token', response.data.token)
-          localStorage.setItem('isAgent', response.data.isAgent)
-          
+          password: loginForm.password,
+        });
+
+        console.log(response);
+
+        if (response.status === 200) {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("isAgent", response.data.isAgent);
+
           props.setAuth({
             token: response.data.token,
-            isAgent: response.data.isAgent
-          })
-          
+            isAgent: response.data.isAgent,
+          });
+
           setLoginForm({
             ...loginForm,
-            redirect: '/'
-          })
-
+            redirect: "/",
+          });
         } else if (response.status === 400) {
           setLoginForm({
             ...loginForm,
             emailErrors: response.data.email,
-            passwordErrors: response.data.password
-          })
+            passwordErrors: response.data.password,
+          });
         }
-      } catch (error){
-        console.log(error)
+      } catch (error) {
+        console.log(error);
       }
     }
   };
@@ -69,7 +68,7 @@ const Login = (props) => {
 
   return (
     <>
-      { loginForm.redirect ? <Redirect to={ loginForm.redirect } /> : null }
+      {loginForm.redirect ? <Redirect to={loginForm.redirect} /> : null}
       <div className="container row flex">
         <form onSubmit={handleSubmit} className="col m8 s12 put-mid">
           <label>
@@ -96,7 +95,9 @@ const Login = (props) => {
               onChange={onTextChange}
             />
             <label htmlFor="password">Password</label>
-            <div className="red-text password error">{loginForm.passwordErrors}</div>
+            <div className="red-text password error">
+              {loginForm.passwordErrors}
+            </div>
           </div>
 
           <div>

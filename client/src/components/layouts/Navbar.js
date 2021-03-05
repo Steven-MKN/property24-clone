@@ -29,7 +29,11 @@ const Navbar = (props) => {
         <ul className="hide-on-med-and-down right">
           {props.auth && props.auth.isAgent ? <AgentLinks /> : ""}
 
-          {props.auth && props.auth.token ? <SignedInLinks setAuth={ props.setAuth }/> : <NoUserLinks />}
+          {props.auth && props.auth.token ? (
+            <SignedInLinks setAuth={props.setAuth} />
+          ) : (
+            <NoUserLinks />
+          )}
         </ul>
       </div>
 

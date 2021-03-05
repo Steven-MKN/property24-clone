@@ -5,7 +5,7 @@ const propertyRoutes = require("./routes/propertyRoutes");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 const morgan = require("morgan");
-const cors = require('cors');
+const cors = require("cors");
 
 const app = express();
 require("dotenv").config();
@@ -13,19 +13,27 @@ require("dotenv").config();
 // write logs
 app.use(morgan("common"));
 
-app.use(cors({
-  credentials: true, origin: 'http://localhost:3000'
-}))
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
 
-app.use((req, res, next) => {	
-  
-  res.header('Access-Control-Allow-Origin', req.headers.origin);       
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Accept, Authorization');   
-  res.header('Access-Control-Allow-Credentials', true);    
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, content-type, Accept, Authorization"
+  );
+  res.header("Access-Control-Allow-Credentials", true);
 
-  if (req.method === 'OPTIONS'){
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); 
-    return res.status(200).send({})
+  if (req.method === "OPTIONS") {
+    res.header(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+    );
+    return res.status(200).send({});
   }
 
   next();

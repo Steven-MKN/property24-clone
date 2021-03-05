@@ -43,7 +43,7 @@ exports.property_delete = async (req, res) => {
 
 exports.properties_get = async (req, res) => {
   const page = positiveNumOrDefault(req.query.page, 1);
-  
+
   res.send({
     method: "get",
     page,

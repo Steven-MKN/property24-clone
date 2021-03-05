@@ -33,9 +33,7 @@ const Searchbar = (props) => {
         <div className="col s4 white-text">
           Min Price
           <select className="input-field search-select" defaultValue="any">
-            <option value="any">
-              Any
-            </option>
+            <option value="any">Any</option>
             <option value="100000">100 000</option>
             <option value="200000">200 000</option>
             <option value="300000">300 000</option>
@@ -49,9 +47,7 @@ const Searchbar = (props) => {
         <div className="col s4 white-text">
           Max Price
           <select className="input-field search-select" defaultValue="any">
-            <option value="any" >
-              Any
-            </option>
+            <option value="any">Any</option>
             <option value="100000">100 000</option>
             <option value="200000">200 000</option>
             <option value="300000">300 000</option>
@@ -65,9 +61,7 @@ const Searchbar = (props) => {
         <div className="col s4 white-text">
           Bedrooms
           <select className="input-field search-select" defaultValue="any">
-            <option value="any" >
-              Any
-            </option>
+            <option value="any">Any</option>
             <option value="1">1+</option>
             <option value="2">2+</option>
             <option value="3">3+</option>

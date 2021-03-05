@@ -45,11 +45,11 @@ exports.signup_post = async (req, res) => {
     const user = await User.create({ email, password, userType });
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(201).json({ 
-      user: user._id, 
+    res.status(201).json({
+      user: user._id,
       userType: user.userType,
-      isAgent: user.userType === 'agent',
-      token 
+      isAgent: user.userType === "agent",
+      token,
     });
   } catch (error) {
     const errors = handleErrors(error);
@@ -64,11 +64,11 @@ exports.login_post = async (req, res) => {
     const user = await User.login(email, password);
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(200).json({ 
-      user: user._id, 
+    res.status(200).json({
+      user: user._id,
       userType: user.userType,
-      isAgent: user.userType === 'agent',
-      token
+      isAgent: user.userType === "agent",
+      token,
     });
   } catch (error) {
     const errors = handleErrors(error);
@@ -78,5 +78,5 @@ exports.login_post = async (req, res) => {
 
 exports.logout_get = (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
-  res.status(200).send({ token: null});
+  res.status(200).send({ token: null });
 };

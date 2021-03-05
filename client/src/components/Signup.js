@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 import { api } from "../config";
 
 const Signup = (props) => {
@@ -11,7 +11,7 @@ const Signup = (props) => {
     passwordErrors: "",
     userType: "default",
     userTypeError: "",
-    redirect: null
+    redirect: null,
   });
 
   const handleSubmit = async (e) => {
@@ -19,48 +19,47 @@ const Signup = (props) => {
 
     setForm({
       ...form,
-      emailErrors: '',
-      passwordErrors: '',
-      userTypeError: ''
-    })
+      emailErrors: "",
+      passwordErrors: "",
+      userTypeError: "",
+    });
 
     if (validInputs()) {
-      try{
-        const url = api + '/signup'
+      try {
+        const url = api + "/signup";
 
-        console.log(url)
-  
-        const response = await axios.post(url , {
+        console.log(url);
+
+        const response = await axios.post(url, {
           email: form.email,
           password: form.password,
-          userType: form.userType
-        })
-  
-        console.log(response)
-  
-        if (response.status === 201){
-          localStorage.setItem('token', response.data.token)
-          localStorage.setItem('isAgent', response.data.isAgent)
-          
+          userType: form.userType,
+        });
+
+        console.log(response);
+
+        if (response.status === 201) {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("isAgent", response.data.isAgent);
+
           props.setAuth({
             token: response.data.token,
-            isAgent: response.data.isAgent
-          })
-          
+            isAgent: response.data.isAgent,
+          });
+
           setForm({
             ...form,
-            redirect: '/'
-          })
-
+            redirect: "/",
+          });
         } else if (response.status === 400) {
           setForm({
             ...form,
             emailErrors: response.data.email,
-            passwordErrors: response.data.password
-          })
+            passwordErrors: response.data.password,
+          });
         }
-      } catch (error){
-        console.log(error)
+      } catch (error) {
+        console.log(error);
       }
     }
   };
@@ -73,45 +72,45 @@ const Signup = (props) => {
   };
 
   const handleUserTypeChange = (e) => {
-
     setForm({
       ...form,
-      userType: e.target.value
-    })
-  }
+      userType: e.target.value,
+    });
+  };
 
   const validInputs = () => {
     let isValid = true;
 
     if (form.email.length < 3) {
-      isValid = false
+      isValid = false;
       setForm({
         ...form,
-        emailErrors: 'Invalid Email'
-      })
+        emailErrors: "Invalid Email",
+      });
     }
 
     if (form.password.length < 6) {
-      isValid = false
+      isValid = false;
       setForm({
         ...form,
-        passwordErrors: 'Password too short'
-      })
+        passwordErrors: "Password too short",
+      });
     }
 
-    if (form.userType === 'default'){
-      isValid = false
+    if (form.userType === "default") {
+      isValid = false;
       setForm({
         ...form,
-        userTypeError: 'Please select a type of user'
-      })
+        userTypeError: "Please select a type of user",
+      });
     }
 
     return isValid;
   };
 
-  return (<>
-      { form.redirect ? <Redirect to={ form.redirect } /> : null}
+  return (
+    <>
+      {form.redirect ? <Redirect to={form.redirect} /> : null}
       <div className="container row flex">
         <form onSubmit={handleSubmit} className="col m8 s12 put-mid">
           <label>
@@ -145,17 +144,19 @@ const Signup = (props) => {
             <div className="col s8 m6 blue-text">
               <select
                 className="input-field search-select"
-                value={ form.userType }
+                value={form.userType}
                 id="userType"
-                onChange={ handleUserTypeChange }
+                onChange={handleUserTypeChange}
               >
                 <option value="default" disabled={true}>
                   Select user type
                 </option>
-                <option value="agent" >Agent</option>
-                <option value="client" >Client</option>
+                <option value="agent">Agent</option>
+                <option value="client">Client</option>
               </select>
-              <div className="red-text password error">{form.userTypeError}</div>
+              <div className="red-text password error">
+                {form.userTypeError}
+              </div>
             </div>
           </div>
 
@@ -171,7 +172,6 @@ const Signup = (props) => {
           <div>
             <Link to="/signup">signup</Link>
           </div>
-
         </form>
       </div>
     </>
