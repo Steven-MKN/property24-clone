@@ -2,31 +2,42 @@ import axios from "axios";
 import { api } from "../config";
 import PropertyCard from "./PropertyCard";
 import Searchbar from "./Searchbar";
+import { Component } from "react";
+import PropertiesList from "./PropertiesList";
 
-const getData = async () => {
-  try {
-    const response = await axios.get(api + "/property", {
-      withCredentials: true,
-      headers: {
-        //'Access-Control-Allow-Origin': 'http://127.0.0.1:3001/*'
-      },
-    });
+class Home extends Component {
+  state = {
+    properties: [],
+  };
 
-    console.log(response);
-  } catch (error) {
-    console.log(error);
+  componentDidMount() {
+    this.getData();
   }
-};
 
-const Home = (props) => {
-  getData();
+  getData = async () => {
+    try {
+      const response = await axios.get(api + "/property", {
+        withCredentials: true,
+        headers: {
+          //'Access-Control-Allow-Origin': 'http://127.0.0.1:3001/*'
+        },
+      });
 
-  return (
-    <div>
-      <Searchbar />
-      <PropertyCard />
-    </div>
-  );
-};
+      console.log(response);
+      this.setState({ properties: response.data.properties });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  render() {
+    return (
+      <div>
+        <Searchbar />
+        <PropertiesList properties={this.state.properties} />
+      </div>
+    );
+  }
+}
 
 export default Home;

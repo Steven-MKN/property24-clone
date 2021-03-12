@@ -23,7 +23,9 @@ const requireAuth = (req, res, next) => {
 
 // check current user
 const checkUser = async (req, res, next) => {
-  const token = req.cookies.jwt;
+  const token = req.header("authorization")
+    ? req.header("authorization").replace("Bearer ", "")
+    : null;
 
   if (token) {
     jwt.verify(token, "secrete here", async (error, decodedToken) => {
@@ -34,6 +36,10 @@ const checkUser = async (req, res, next) => {
       } else {
         console.log(decodedToken);
         let user = await User.findById(decodedToken.id);
+
+        console.log(user);
+
+        user.password = null;
         res.locals.user = user;
         next();
       }

@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 });
 
 // middleware
-app.use(express.static("public"));
+app.use("/api/public/", express.static("public"));
 app.use(express.json());
 app.use(cookieParser());
 

@@ -4,13 +4,14 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import axios from "axios";
-import { api } from "./config";
+// import { api } from "./config";
 import { useState } from "react";
+import PropertyCreate from "./components/PropertyCreate";
 
 axios.interceptors.request.use(
   (config) => {
-    const { origin } = new URL(config.url);
-    const allowedOrigins = [api];
+    // const { origin } = new URL(config.url);
+    // const allowedOrigins = [api];
     const token = localStorage.getItem("token");
 
     //if (allowedOrigins.includes(origin)) {
@@ -42,6 +43,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <Signup setAuth={setAuth} />
+          </Route>
+          <Route path="/property/create">
+            <PropertyCreate auth={auth} />
           </Route>
           <Route path="/*">
             <Home />

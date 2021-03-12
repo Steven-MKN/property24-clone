@@ -14,7 +14,7 @@ const Navbar = (props) => {
   return (
     <nav className="nav-wrapper white navbar">
       <NavLink to="/" className="brand-logo logo">
-        <img src="property24_logo.svg" alt="property24 logo" />
+        <img src="/property24_logo.svg" alt="property24 logo" />
       </NavLink>
 
       <a
