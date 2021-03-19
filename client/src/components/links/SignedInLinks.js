@@ -10,11 +10,13 @@ const SignedInLinks = (props) => {
     const url = api + "/logout";
 
     const response = await axios.get(url);
-    if (response.status === 200) {
+    if (response.status === 200 || response.status === 304) {
       localStorage.removeItem("token");
       props.setAuth(null);
       setRedirect("/");
     }
+
+    props.onNavToggle();
   };
 
   return [

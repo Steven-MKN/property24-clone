@@ -1,5 +1,5 @@
 const { propertyConfig } = require("../config/config");
-const { positiveNumOrDefault } = require("../utils/utils");
+const { positiveNumOrDefault, sendEmail } = require("../utils/utils");
 
 const multer = require("multer");
 const Property = require("../models/Property");
@@ -19,10 +19,22 @@ const upload = multer({ storage: storage }).single("file");
 exports.property_get = async (req, res) => {
   const id = req.params.id;
 
-  res.send({
-    method: "get",
-    id,
-  });
+  try {
+    const property = await Property.findById(id);
+
+    if (property) {
+      res.send({
+        method: "get",
+        id,
+        property,
+      });
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
 };
 
 exports.property_post = async (req, res) => {
@@ -80,13 +92,13 @@ exports.property_delete = async (req, res) => {
 exports.properties_get = async (req, res) => {
   try {
     const page = positiveNumOrDefault(req.query.page, 1);
+    const propertiesPerPage = propertyConfig.propertiesPerPage;
 
-    const properties = await Property.find().limit(
-      propertyConfig.propertiesPerPage
-    );
+    const properties = await Property.find().limit(propertiesPerPage);
+
     res.status(200).send({
       page,
-      propertiesPerPage: propertyConfig.propertiesPerPage,
+      propertiesPerPage,
       properties,
     });
   } catch (error) {
@@ -121,10 +133,25 @@ exports.propertyImage_post = (req, res) => {
 };
 
 exports.contact_post = async (req, res) => {
-  const data = req.data;
+  const data = req.body;
 
-  res.send({
-    method: "post",
-    data,
-  });
+  console.log(data);
+
+  try {
+    const agent = await User.findById(data.agentId);
+
+    if (agent) {
+      data.clientUrl = "https://localhost:3000";
+      data.agentName = agent.name;
+      data.agentEmail = agent.email;
+
+      await sendEmail(data);
+      res.sendStatus(200);
+    } else {
+      res.send(400);
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
 };

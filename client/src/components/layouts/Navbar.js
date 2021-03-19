@@ -45,9 +45,17 @@ const Navbar = (props) => {
         >
           <i className="material-icons left">close</i>
         </a>
-        {props.auth && props.auth.isAgent ? <AgentLinks /> : ""}
+        {props.auth && props.auth.isAgent ? (
+          <AgentLinks onNavToggle={onNavToggle} />
+        ) : (
+          ""
+        )}
 
-        {props.auth && props.auth.token ? <SignedInLinks /> : <NoUserLinks />}
+        {props.auth && props.auth.token ? (
+          <SignedInLinks setAuth={props.setAuth} onNavToggle={onNavToggle} />
+        ) : (
+          <NoUserLinks onNavToggle={onNavToggle} />
+        )}
       </ul>
     </nav>
   );

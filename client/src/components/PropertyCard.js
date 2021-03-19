@@ -1,14 +1,34 @@
 import { api } from "../config";
 import { numToReadFormat } from "../utils";
+import { useHistory } from "react-router-dom";
+
+const openProperty = async (history, id) => {
+  history.push("/property/" + id);
+};
 
 const PropertyCard = (p) => {
+  const history = useHistory();
+
   return (
-    <div className="container property-card">
+    <div
+      className="container property-card"
+      onClick={() => openProperty(history, p._id)}
+    >
       <div className="card-heading">
         <div className="blue lighten-3 card-profile-image-div">
-          <img src="dp.svg" className="card-profile-image" alt="..." />
+          <img
+            src={
+              p.author.imageRef
+                ? api + "/public/" + p.author.imageRef
+                : "dp.svg"
+            }
+            className="card-profile-image"
+            alt="..."
+          />
         </div>
-        <h6 className="black-text card-heading-text">Someone Here</h6>
+        <h6 className="black-text card-heading-text">
+          Listed by {p.author.name + " " + p.author.surname}
+        </h6>
       </div>
       <div className="row card-property-collage-div">
         <div className="col s9 card-property-main-image-div">

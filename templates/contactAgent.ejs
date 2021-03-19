@@ -1,0 +1,22 @@
+<div style="background: whitesmoke;">
+    <div style="background: #fff; width: 100%; height: 300px; display: flex; justify-content: center; overflow: hidden;">
+        <img src="../public/property24_logo.svg" />
+    </div>
+    <div style="padding:10px; padding-bottom: 20px; background: #1565C0 ;">
+        <h3>Hi <%= data.agentName %></h3>
+        <p><%= data.name %> is interested in a property you listed.</p>
+        <p>Their message reads:</p>
+            <blockquote style="background: white; width:fit-content; padding: 20px; border-radius: 10px;">
+                <q><%= data.message %></q>
+                <br />
+                <br />
+                - <%= data.name %>
+                <br />
+                <a href="mailto:<%= data.email %>"><%= data.email %></a><br />
+                <a href="tel:<%= data.number %>"><%= data.number %></a>
+            </blockquote>
+    <p>Thier contact details are listed above.</p>
+    <a href="<%= data.clientUrl + data.propertyId %>"><%= data.propertyId %></a>
+    <p>Property24-clone Server</p>
+    </div>
+</div>

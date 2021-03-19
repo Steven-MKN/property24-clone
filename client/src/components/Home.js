@@ -1,6 +1,5 @@
 import axios from "axios";
 import { api } from "../config";
-import PropertyCard from "./PropertyCard";
 import Searchbar from "./Searchbar";
 import { Component } from "react";
 import PropertiesList from "./PropertiesList";

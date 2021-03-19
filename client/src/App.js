@@ -7,6 +7,7 @@ import axios from "axios";
 // import { api } from "./config";
 import { useState } from "react";
 import PropertyCreate from "./components/PropertyCreate";
+import PropertyPage from "./components/PropertyPage";
 
 axios.interceptors.request.use(
   (config) => {
@@ -46,6 +47,9 @@ function App() {
           </Route>
           <Route path="/property/create">
             <PropertyCreate auth={auth} />
+          </Route>
+          <Route path="/property/:id">
+            <PropertyPage auth={auth} />
           </Route>
           <Route path="/*">
             <Home />
